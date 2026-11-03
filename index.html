@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#000000" />
+<title>PROJECT STRIKE</title>
+<style>:root{--acc:#f2b33d;--ui:#0e10129e;--txt:#f3efe6}*{box-sizing:border-box}html,body{height:100%;color:var(--txt);-webkit-user-select:none;user-select:none;background:#000;margin:0;font-family:-apple-system,SF Pro Display,Segoe UI,PingFang SC,sans-serif;overflow:hidden}canvas#c{width:100vw;height:100vh;display:block;position:fixed;inset:0}.hidden{display:none!important}#hud{pointer-events:none;position:fixed;inset:0}#cross{width:0;height:0;position:absolute;top:50%;left:50%}#cross i{background:#7dff6a;position:absolute;box-shadow:0 0 2px #000,0 0 1px #000}#cross .t,#cross .b{width:2px;height:7px;left:-1px}#cross .l,#cross .r{width:7px;height:2px;top:-1px}#hitmark{opacity:0;width:26px;height:26px;margin:-13px;transition:opacity .15s;position:absolute;top:50%;left:50%}#hitmark:before,#hitmark:after{content:"";clip-path:polygon(0 0,100% 0,100% 35%,0 35%,0 65%,100% 65%,100% 100%,0 100%);background:#fff;width:2px;height:30px;position:absolute;top:-2px;left:12px;transform:rotate(45deg);box-shadow:0 0 2px #000}#hitmark:after{transform:rotate(-45deg)}#hitmark.head:before,#hitmark.head:after{background:#ff4a3a}.panel{background:var(--ui);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);letter-spacing:.5px;border-radius:6px;padding:8px 14px;font-weight:700;position:absolute}#health{align-items:center;gap:10px;font-size:30px;display:flex;bottom:18px;left:18px}#health small,#ammo small{opacity:.7;font-size:12px;font-weight:600}#hpbar{background:#ffffff26;border-radius:3px;width:120px;height:6px;overflow:hidden}#hpbar div{background:linear-gradient(90deg,#f2b33d,#ffd77a);width:100%;height:100%;transition:width .2s}#ammo{text-align:right;font-size:30px;bottom:18px;right:18px}#ammo .wn{opacity:.75;letter-spacing:2px;font-size:12px;display:block}#score{gap:18px;font-size:15px;display:flex;top:14px;left:50%;transform:translate(-50%)}#score b{color:var(--acc)}#killfeed{flex-direction:column;align-items:flex-end;gap:4px;display:flex;position:absolute;top:16px;right:18px}#killfeed div{background:var(--ui);border-left:3px solid var(--acc);border-radius:4px;padding:5px 10px;font-size:13px;font-weight:600}#dmg{transition:box-shadow .25s;position:absolute;inset:0;box-shadow:inset 0 0 160px #c8000000}#dmgdir{opacity:0;width:220px;height:220px;margin:-110px;transition:opacity .6s;position:absolute;top:50%;left:50%}#dmgdir:before{content:"";background:radial-gradient(#ff281ee6,#ff281e00 70%);width:60px;height:14px;margin-left:-30px;position:absolute;top:0;left:50%}#scope{background:radial-gradient(circle,#0000 0 34vh,#000 34.3vh);position:absolute;inset:0}#scope:before{content:"";background:#000;height:1px;position:absolute;top:50%;left:0;right:0}#scope:after{content:"";background:#000;width:1px;position:absolute;top:0;bottom:0;left:50%}#fps{opacity:.8;text-shadow:0 1px 2px #000;font:600 12px ui-monospace,Menlo,monospace;position:absolute;top:8px;left:10px}#weapons{-webkit-backdrop-filter:none;backdrop-filter:none;background:0 0;flex-direction:column;align-items:flex-end;gap:4px;padding:0;font-size:12px;display:flex;bottom:96px;right:18px}#weapons span{background:var(--ui);opacity:.55;border-radius:3px;padding:3px 9px}#weapons span.on{opacity:1;border-right:3px solid var(--acc)}#hint{opacity:.8;text-shadow:0 1px 3px #000;font-size:13px;position:absolute;bottom:90px;left:50%;transform:translate(-50%)}.menu{background:linear-gradient(120deg,#0a0908db,#19120a8c);justify-content:center;align-items:center;display:flex;position:fixed;inset:0}.card{background:#121110d1;border:1px solid #ffffff14;border-radius:12px;width:min(560px,92vw);padding:34px 38px;box-shadow:0 30px 80px #00000080}.card h1{letter-spacing:6px;margin:0 0 4px;font-size:44px;font-weight:900}.card h1 span{color:var(--acc)}.card .sub{opacity:.7;letter-spacing:1px;margin-bottom:26px;font-size:14px}.btn{letter-spacing:2px;cursor:pointer;background:var(--acc);color:#1a1408;border:0;border-radius:7px;width:100%;margin:10px 0;padding:14px;font-size:16px;font-weight:800;display:block}.btn.alt{color:var(--txt);background:#ffffff14}.btn:hover{filter:brightness(1.1)}.row{align-items:center;gap:10px;margin:12px 0;font-size:14px;display:flex}.row label{opacity:.75;width:90px}.seg{flex:1;gap:6px;display:flex}.seg button{color:var(--txt);cursor:pointer;background:0 0;border:1px solid #ffffff1f;border-radius:6px;flex:1;padding:8px;font-weight:700}.seg button.on{border-color:var(--acc);color:var(--acc);background:#f2b33d2e}.keys{opacity:.8;grid-template-columns:1fr 1fr;gap:4px 18px;margin-top:18px;font-size:13px;display:grid}.keys b{min-width:64px;color:var(--acc);display:inline-block}#loading{letter-spacing:3px;background:#0b0a09;justify-content:center;align-items:center;font-size:14px;display:flex;position:fixed;inset:0}#endTitle.win{color:#8fe36a}#endTitle.lose{color:#ff5a4a}html,body{touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;overscroll-behavior:none}.menu{touch-action:pan-y;-webkit-overflow-scrolling:touch;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);overflow-y:auto}.menu .card{margin:auto}#touch{z-index:5;touch-action:none;position:fixed;inset:0}.tstick{opacity:0;pointer-events:none;background:#0000001f;border:2px solid #ffffff47;border-radius:50%;width:120px;height:120px;margin:-60px 0 0 -60px;transition:opacity .12s;position:absolute}.tstick.on{opacity:1}.tknob{background:#fff6;border-radius:50%;width:52px;height:52px;margin:-26px;position:absolute;top:50%;left:50%;box-shadow:0 2px 8px #0006}.tbtn{color:#ffffffe6;letter-spacing:1px;-webkit-backdrop-filter:blur(3px);background:#0e10126b;border:2px solid #ffffff47;border-radius:50%;justify-content:center;align-items:center;font-size:15px;font-weight:800;display:flex;position:absolute}.tbtn svg{width:55%;height:55%}.tbtn.down{border-color:var(--acc);background:#f2b33d73}.tbtn.on{border-color:var(--acc);color:var(--acc);background:#f2b33d4d}#t_fire{width:92px;height:92px;right:calc(30px + env(safe-area-inset-right));bottom:calc(64px + env(safe-area-inset-bottom));background:#be281e6b;border-color:#ff786499}#t_fire2{width:62px;height:62px;left:calc(26px + env(safe-area-inset-left));top:calc(168px + env(safe-area-inset-top));background:#be281e52;border-color:#ff786480}#t_ads{width:60px;height:60px;right:calc(138px + env(safe-area-inset-right));bottom:calc(132px + env(safe-area-inset-bottom));font-size:14px}#t_jump{width:60px;height:60px;right:calc(34px + env(safe-area-inset-right));bottom:calc(172px + env(safe-area-inset-bottom))}#t_crouch{width:54px;height:54px;right:calc(140px + env(safe-area-inset-right));bottom:calc(40px + env(safe-area-inset-bottom))}#t_reload{width:50px;height:50px;right:calc(208px + env(safe-area-inset-right));bottom:calc(88px + env(safe-area-inset-bottom))}#t_weapon{width:74px;height:40px;right:calc(28px + env(safe-area-inset-right));top:calc(56px + env(safe-area-inset-top));border-radius:20px;font-size:13px}#t_pause{width:42px;height:42px;left:calc(12px + env(safe-area-inset-left));top:calc(10px + env(safe-area-inset-top));font-size:15px}body.touch #weapons,body.touch .keys.kb{display:none}body.touch #fps{left:calc(62px + env(safe-area-inset-left));top:calc(22px + env(safe-area-inset-top))}body.touch #ammo{text-align:left;bottom:auto;right:auto;top:calc(104px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));padding:5px 12px;font-size:22px}body.touch #killfeed{top:calc(104px + env(safe-area-inset-top));right:calc(110px + env(safe-area-inset-right))}body.touch #health{bottom:auto;top:calc(58px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));padding:6px 12px;font-size:22px}body.touch #hpbar{width:80px}body.touch #score{top:calc(10px + env(safe-area-inset-top));padding:6px 12px;font-size:13px}body.touch #hint{top:30%;bottom:auto}body:not(.touch) .keys.tc{display:none}@media (height>=700px){body.touch .tbtn{zoom:1.4}body.touch #hud .panel{zoom:1.2}}.credits{opacity:.75;margin-top:14px;font-size:11px;line-height:1.5}.credits summary{cursor:pointer;opacity:.9;font-size:12px}.credits a{color:var(--acc)}.credits ul{margin:4px 0;padding-left:18px}.credits p{margin:4px 0}#rotate{display:none}@media (orientation:portrait){body.touch #rotate{z-index:50;letter-spacing:2px;text-align:center;background:#0b0a09;flex-direction:column;justify-content:center;align-items:center;gap:18px;padding:30px;font-size:16px;display:flex;position:fixed;inset:0}}#rotate .ph{border:3px solid var(--acc);border-radius:9px;width:46px;height:78px;animation:2.2s ease-in-out infinite rot}@keyframes rot{0%,25%{transform:rotate(0)}55%,to{transform:rotate(90deg)}}@media (height<=520px){.card{width:min(640px,94vw);padding:16px 22px}.card h1{letter-spacing:4px;font-size:28px}.card .sub{margin-bottom:10px;font-size:12px}.btn{margin:6px 0;padding:10px;font-size:15px}.row{margin:7px 0;font-size:13px}.row label{width:76px}.seg button{padding:6px 4px;font-size:12px}.keys{margin-top:8px;font-size:11px}}</style>
+  <script type="module" crossorigin src="./assets/index-DYb7MxBC.js"></script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud" class="hidden">
+  <div id="dmg"></div>
+  <div id="dmgdir"></div>
+  <div id="scope" class="hidden"></div>
+  <div id="cross"><i class="t"></i><i class="b"></i><i class="l"></i><i class="r"></i></div>
+  <div id="hitmark"></div>
+  <div id="fps"></div>
+  <div id="score" class="panel"><span>KILLS <b id="kills">0</b></span><span>ENEMIES LEFT <b id="left">0</b></span><span id="diffLbl"></span></div>
+  <div id="killfeed"></div>
+  <div id="health" class="panel"><span>✚</span><span id="hp">100</span><div><small>HEALTH</small><div id="hpbar"><div></div></div></div></div>
+  <div id="weapons" class="panel"><span data-w="rifle">1 · M4</span><span data-w="pistol">2 · P-12</span><span data-w="sniper">3 · SR-90</span></div>
+  <div id="ammo" class="panel"><span class="wn" id="wname">RIFLE</span><span id="mag">30</span> <small>/ <span id="res">90</span></small></div>
+  <div id="hint"></div>
+</div>
+
+<div id="mainMenu" class="menu hidden">
+  <div class="card">
+    <h1>PROJECT <span>STRIKE</span></h1>
+    <div class="sub">单机死亡竞赛：消灭全部敌人</div>
+    <button class="btn" id="startBtn">开始游戏 START</button>
+    <div id="texStatus" style="font-size:12px;opacity:.6;min-height:16px;text-align:center"></div>
+    <div class="row"><label>地图</label><div class="seg" data-opt="map"><button data-v="valletta">瓦莱塔 Valletta</button><button data-v="desert">沙漠小镇</button></div></div>
+    <div class="row"><label>画质</label><div class="seg" data-opt="quality"><button data-v="high">高画质</button><button data-v="performance">性能模式</button><button data-v="mobile">移动端</button></div></div>
+    <div class="row"><label>环境光遮蔽</label><div class="seg" data-opt="ao"><button data-v="off">关闭</button><button data-v="on">开启 (实验)</button></div></div>
+    <div class="row"><label>难度</label><div class="seg" data-opt="diff"><button data-v="easy">简单</button><button data-v="normal">普通</button><button data-v="hard">困难</button></div></div>
+    <div class="row"><label id="sensLbl">鼠标灵敏度</label><input id="sens" type="range" min="0.4" max="2.5" step="0.05" value="1" style="flex:1"></div>
+    <div class="keys kb">
+      <span><b>WASD</b>移动</span><span><b>鼠标</b>视角</span>
+      <span><b>左键</b>开火</span><span><b>右键</b>瞄准 / 开镜</span>
+      <span><b>Space</b>跳跃</span><span><b>Shift</b>静步</span>
+      <span><b>Ctrl / C</b>蹲下</span><span><b>R</b>换弹</span>
+      <span><b>1 2 3</b>步枪/手枪/狙击</span><span><b>Esc</b>暂停</span>
+    </div>
+    <div class="keys tc">
+      <span><b>左半屏</b>按住拖动 = 移动</span><span><b>右半屏</b>拖动 = 视角</span>
+      <span><b>红色按钮</b>开火（按住可同时转视角）</span><span><b>瞄准</b>开镜 / 取消</span>
+      <span><b>跳 / 蹲</b>跳跃 / 蹲下切换</span><span><b>R / 切枪</b>换弹 / 换武器</span>
+    </div>
+    <details class="credits"><summary>素材署名 / Credits</summary>
+      <p>以下模型按 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> 使用，均有修改（减面、贴图压缩、动画切分）：</p>
+      <ul>
+        <li>“M4 - FPS Weapon Animations Pack (v.1)” — <a href="https://sketchfab.com/3d-models/m4-fps-weapon-animations-pack-v1-662fc74dda2646cfb48fc610705768ef" target="_blank" rel="noopener">BarcodeGames</a></li>
+        <li>“sniper animated” — <a href="https://sketchfab.com/3d-models/sniper-animated-eae1ba5b43ae4bc89b0647fb5d8a2d27" target="_blank" rel="noopener">DJMaesen</a></li>
+        <li>“animated pistol” — <a href="https://sketchfab.com/3d-models/animated-pistol-30d1b612b2334a8294b02692b8c10cf1" target="_blank" rel="noopener">DJMaesen</a></li>
+        <li>“Tree GN” — <a href="https://sketchfab.com/3d-models/tree-gn-40da979cb23f492583ec89c4196cff4e" target="_blank" rel="noopener">TechArtBGN</a></li>
+        <li>“Enrico Mizzi” — <a href="https://sketchfab.com/3d-models/enrico-mizzi-b7d05f64a80b45a6bdb8c176e95bb7f5" target="_blank" rel="noopener">WGPdigital</a></li>
+      </ul>
+      <p>“Christusfigur” — <a href="https://sketchfab.com/3d-models/christusfigur-f05c0c0b126e48b7b9d31adad6f94f37" target="_blank" rel="noopener">noe-3d.at</a>，<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>（仅限非商业用途），有修改。</p>
+      <p>贴图与天空：ambientCG、cgbookcase、Poly Haven（CC0）。引擎：three.js（MIT）。其余建筑、人物、音效为本项目原创。本游戏为非商业作品，与 Counter-Strike / Valve 无关。</p>
+    </details>
+  </div>
+</div>
+<div id="pauseMenu" class="menu hidden">
+  <div class="card">
+    <h1>PAUSED</h1>
+    <div class="sub">游戏已暂停</div>
+    <button class="btn" id="resumeBtn">继续游戏</button>
+    <div class="row"><label>画质</label><div class="seg" data-opt="quality"><button data-v="high">高画质</button><button data-v="performance">性能模式</button><button data-v="mobile">移动端</button></div></div>
+    <button class="btn alt" id="menuBtn">返回主菜单</button>
+  </div>
+</div>
+<div id="endMenu" class="menu hidden">
+  <div class="card">
+    <h1 id="endTitle">VICTORY</h1>
+    <div class="sub" id="endSub"></div>
+    <button class="btn" id="restartBtn">重新开始</button>
+    <button class="btn alt" id="endMenuBtn">返回主菜单</button>
+  </div>
+</div>
+<div id="loading">LOADING…</div>
+<div id="rotate"><div class="ph"></div><div>请把设备横过来玩<br><small style="opacity:.6;letter-spacing:1px">Rotate to landscape</small></div></div>
+<script>
+  // show startup failures instead of hanging on the loading screen
+  function __fail(msg) { var l = document.getElementById('loading'); if (l && !l.classList.contains('hidden')) { l.style.flexDirection = 'column'; l.style.gap = '12px'; l.style.textAlign = 'center'; l.style.padding = '24px'; l.innerHTML = '<div>启动失败 / STARTUP ERROR</div><div style="font-size:12px;opacity:.7;letter-spacing:0;max-width:640px">' + String(msg).replace(/</g, '&lt;') + '</div><div style="font-size:12px;opacity:.7;letter-spacing:0">请用 Chrome 打开，或在本地运行 npm run dev</div>'; } }
+  window.addEventListener('error', function (e) { __fail(e.message || e); });
+  window.addEventListener('unhandledrejection', function (e) { __fail(e.reason && e.reason.message || e.reason); });
+  setTimeout(function () { __fail('超过 30 秒仍未完成启动（可能是 WebGL 不可用或脚本被拦截）'); }, 30000);
+</script>
+</body>
+</html>
