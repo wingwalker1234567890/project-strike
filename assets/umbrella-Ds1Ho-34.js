@@ -1,0 +1,1 @@
+var e=new URL(`umbrella-3-Bnuht6.glb`,import.meta.url).href;export{e as default};
