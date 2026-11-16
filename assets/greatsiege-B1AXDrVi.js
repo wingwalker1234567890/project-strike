@@ -1,1 +1,0 @@
-var e=new URL(`greatsiege-VyIdluDt.glb`,import.meta.url).href;export{e as default};
