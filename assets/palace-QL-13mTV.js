@@ -1,0 +1,1 @@
+var e=new URL(`palace-BgqvFugY.glb`,import.meta.url).href;export{e as default};
