@@ -1,0 +1,1 @@
+var e=new URL(`museum-BMmTndsO.glb`,import.meta.url).href;export{e as default};
