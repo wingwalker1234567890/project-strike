@@ -1,0 +1,1 @@
+var e=new URL(`library-Cm19JUXJ.glb`,import.meta.url).href;export{e as default};
