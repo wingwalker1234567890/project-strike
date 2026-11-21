@@ -1,0 +1,1 @@
+var e=new URL(`venice_gondola_ride-C94X1571.glb`,import.meta.url).href;export{e as default};
