@@ -1,1 +1,0 @@
-var e=new URL(`santorini_oia-BzYBpMbs.glb`,import.meta.url).href;export{e as default};
