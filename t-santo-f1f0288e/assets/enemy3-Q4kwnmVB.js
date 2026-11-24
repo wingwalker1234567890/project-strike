@@ -1,0 +1,1 @@
+var e=new URL(`enemy3-Bipyy0x3.glb`,import.meta.url).href;export{e as default};
