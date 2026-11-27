@@ -1,0 +1,1 @@
+var e=new URL(`knife-BAtXoV-s.glb`,import.meta.url).href;export{e as default};

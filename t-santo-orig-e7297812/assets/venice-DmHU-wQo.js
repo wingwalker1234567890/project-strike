@@ -1,0 +1,1 @@
+var e=new URL(`venice-BLxyKG6g.glb`,import.meta.url).href;export{e as default};

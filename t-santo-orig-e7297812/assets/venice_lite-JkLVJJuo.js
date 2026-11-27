@@ -1,0 +1,1 @@
+var e=new URL(`venice_lite-Cb5ZxjMV.glb`,import.meta.url).href;export{e as default};
