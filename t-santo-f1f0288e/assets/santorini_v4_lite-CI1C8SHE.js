@@ -1,0 +1,1 @@
+var e=new URL(`santorini_v4_lite-BGzV_tY7.glb`,import.meta.url).href;export{e as default};
